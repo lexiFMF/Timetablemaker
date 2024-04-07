@@ -1,0 +1,39 @@
+<!-- templates/account_management.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Account Management
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1 class="form-title">Account Management</h1>
+        <form method="post" enctype="multipart/form-data" class="account-form">
+            {% csrf_token %}
+
+            <!-- User Update Form -->
+            <fieldset class="fieldset">
+                <legend>User Information</legend>
+                {{ user_form.as_p }}
+            </fieldset>
+
+            <!-- Profile Update Form -->
+            <fieldset class="fieldset">
+                <legend>Profile Information</legend>
+                {{ profile_form.as_p }}
+            </fieldset>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn">Update Account</button>
+        </form>
+    </div>
+    <!-- Display success messages -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

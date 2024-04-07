@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+
+{% block content %}
+<div class="header">
+        <h1>Welcome, {{ user.username }}!</h1>
+    </div>
+
+    <div class="user-details">
+        <h2>User Details</h2>
+        <ul>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Username:</strong> {{ user.username }}</li>
+            <!-- Add more user details as needed -->
+        </ul>
+    </div>
+
+
+{% if user.is_authenticated and user.is_manager %}
+    <div class="container mt-5">
+        <h2>Admin Dashboard</h2>
+        <a href="{% url 'create_day' %}" class="btn">Create New Day</a>
+        <a href="{% url 'create_requirement' %}" class="btn">Create New Requirement</a>
+    </div>
+{% endif %}
+    <div class="container mt-5">
+        <h2>Your Availability:</h2>
+        {% if timetables %}
+            <ul class="timetables">
+                {% for timetable in timetables %}
+                    <li><a href="{% url 'edit_timetable' %}">{{ timetable.date }} : {{ timetable.start_time }} - {{ timetable.end_time }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No timetables found.</p>
+        {% endif %}
+        {% if not user.is_authenticated %}
+            <p>Please <a href="{% url 'login' %}">login</a> to view your timetables.</p>
+        {% endif %}
+    </div>
+{% endblock %}

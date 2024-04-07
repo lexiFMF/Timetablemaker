@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    vector
+{% endblock %}
+
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>vector</title>
+</head>
+<body>
+    <h1>vector</h1>
+
+        {% for vector in vector_output %}
+            <ul>
+                <li>{{ vector.name}}: {{ vector.req_vector}}</li>
+            </ul>
+        {% endfor %}
+
+
+</body>
+{% endblock %}

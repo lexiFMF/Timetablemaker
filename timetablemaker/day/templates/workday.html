@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}
+    Workers List
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+    <h1>Schedule for Selected Date</h1>
+        {% if schedule_output %}
+        <div>
+            {{ schedule_output|safe }}  <!-- Use the |safe filter to render HTML content -->
+        </div>
+        {% else %}
+        <div>
+            <p> No workday requirements selected </p>  <!-- Use the |safe filter to render HTML content -->
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
